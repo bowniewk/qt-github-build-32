@@ -6,6 +6,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+    - name: Uninstall default mingw
+      run: |
+        choco.exe uninstall mingw
+        choco install qt-sdk-windows-x86-mingw_opengl
+        
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
       with:
