@@ -6,6 +6,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+    - name: show mingw path
+      run: |
+        dir C:\tools\
+        set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
+    
     #- name: Uninstall default mingw
     #  run: |
     #    choco.exe uninstall mingw
