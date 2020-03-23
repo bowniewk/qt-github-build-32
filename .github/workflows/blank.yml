@@ -11,7 +11,8 @@ jobs:
         dir C:\tools\
         dir C:\ProgramData\chocolatey
         dir C:\ProgramData\chocolatey\tools
-        path qmake
+        Get-ChildItem -Path Env:\
+        mingw32-make.exe qmake
         path mingw32-make.exe
         env
         #set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
