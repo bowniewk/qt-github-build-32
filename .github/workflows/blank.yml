@@ -18,7 +18,7 @@ jobs:
         # Target platform for build
         #target: desktop # optional, default is desktop
         # Architecture for Windows/Android
-        arch: win32_mingw53 # mingw73 much slower download
+        arch: win32_msvc2015 #win32_mingw53 # mingw73 much slower download
         # Whether or not to install Qt dependencies on Linux
         #install-deps: true # optional, default is true
         #modules: qtwidgets widgets
