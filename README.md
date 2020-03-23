@@ -1,1 +1,1 @@
-"# qt-github-build-32" 
+# qt-github-build-32
