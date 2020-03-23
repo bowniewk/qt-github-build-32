@@ -1,0 +1,39 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2.5.3
+      with:
+        # Directory to install Qt
+        #dir: d:/a/qt-github-build/qt5 # optional
+        # Version of Qt to install
+        version: 5.11.3 # 5.12.7 - much slower
+        # Host platform
+        #host: windows # optional
+        # Target platform for build
+        #target: desktop # optional, default is desktop
+        # Architecture for Windows/Android
+        arch: win64_mingw53 # mingw73 much slower download
+        # Whether or not to install Qt dependencies on Linux
+        #install-deps: true # optional, default is true
+        #modules: qtwidgets widgets
+
+    - name: Qt5_DIR environment variable
+      run: echo %Qt5_DIR%
+      
+    - uses: actions/checkout@v1
+
+    - name: Qmake and make
+      working-directory: d:/a/qt-github-build-32/qt-github-build-32
+      run: | 
+        qmake.exe qt-github-build-32.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+        mingw32-make.exe qmake_all
+        
+    - name: Make mingw32
+      working-directory: d:/a/qt-github-build-32/qt-github-build-32
+      run: mingw32-make.exe -j8
