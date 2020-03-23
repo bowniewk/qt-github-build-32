@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Uninstall default mingw
-      run: |
-        choco.exe uninstall mingw
-        choco install qt-sdk-windows-x86-mingw_opengl
+    #- name: Uninstall default mingw
+    #  run: |
+    #    choco.exe uninstall mingw
+    #    choco install qt-sdk-windows-x86-mingw_opengl
         
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
@@ -36,10 +36,12 @@ jobs:
     - name: Qmake and make
       working-directory: d:/a/qt-github-build-32/qt-github-build-32
       run: | 
+        set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
         qmake.exe qt-github-build-32.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
-        %Qt5_Dir%\bin\mingw32-make.exe qmake_all
+        mingw32-make.exe qmake_all
         
     - name: Make mingw32
       working-directory: d:/a/qt-github-build-32/qt-github-build-32
       run: |
-        %Qt5_Dir%\bin\mingw32-make.exe -j8
+        set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
+        mingw32-make.exe -j8
