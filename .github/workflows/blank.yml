@@ -11,11 +11,10 @@ jobs:
         dir C:\tools\
         dir C:\ProgramData\chocolatey
         dir C:\ProgramData\chocolatey\tools
-        Get-ChildItem -Path Env:\
-        mingw32-make.exe qmake
-        path mingw32-make.exe
-        env
-        #set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
+        #Get-ChildItem -Path Env:\
+        (Get-Command mingw32-make.exe).Path
+        (Get-Command qmake.exe).Path
+        setx PATH "C:\tools\mingw32\bin;C:\tools\mingw64\bin;$env:path" -m
     
     #- name: Uninstall default mingw
     #  run: |
