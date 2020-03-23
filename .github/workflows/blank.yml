@@ -9,6 +9,7 @@ jobs:
     - name: show mingw path
       run: |
         dir C:\tools\
+        dir C:\ProgramData\chocolatey
         set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
     
     #- name: Uninstall default mingw
