@@ -13,7 +13,6 @@ jobs:
         dir C:\ProgramData\chocolatey\tools
         #Get-ChildItem -Path Env:\
         (Get-Command mingw32-make.exe).Path
-        (Get-Command qmake.exe).Path
         setx PATH "C:\tools\mingw32\bin;C:\tools\mingw64\bin;$env:path" -m
     
     #- name: Uninstall default mingw
@@ -38,8 +37,13 @@ jobs:
         #install-deps: true # optional, default is true
         #modules: qtwidgets widgets
 
-    - name: Qt5_DIR environment variable
-      run: echo %Qt5_DIR%
+    - name: Show Qt5 setup
+      run: |
+        echo %Qt5_DIR%
+        (Get-Command qmake.exe).Path
+        (Get-Command mingw32-make.exe).Path
+
+
       
     - uses: actions/checkout@v1
 
