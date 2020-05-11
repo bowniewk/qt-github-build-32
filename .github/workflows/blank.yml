@@ -26,7 +26,7 @@ jobs:
         # Directory to install Qt
         #dir: d:/a/qt-github-build/qt5 # optional
         # Version of Qt to install
-        version: 5.15.0 #5.11.3 # 5.12.7 - much slower
+        version: 5.14.0 #5.11.3 # 5.12.7 - much slower
         # Host platform
         #host: windows # optional
         # Target platform for build
