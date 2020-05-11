@@ -26,13 +26,13 @@ jobs:
         # Directory to install Qt
         #dir: d:/a/qt-github-build/qt5 # optional
         # Version of Qt to install
-        version: 5.14.0 #5.11.3 # 5.12.7 - much slower
+        #version: 5.14.0 #5.11.3 # 5.12.7 - much slower
         # Host platform
         #host: windows # optional
         # Target platform for build
         #target: desktop # optional, default is desktop
         # Architecture for Windows/Android
-        arch: win32_mingw53 #win32_msvc2015 #win32_mingw53 # mingw73 much slower download
+        arch: win32_mingw73 #win32_msvc2015 #win32_mingw53 # mingw73 much slower download
         # Whether or not to install Qt dependencies on Linux
         #install-deps: true # optional, default is true
         #modules: qtwidgets widgets
