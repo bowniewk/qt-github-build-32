@@ -52,7 +52,7 @@ jobs:
     - name: Qmake and make
       working-directory: d:/a/qt-github-build-32/qt-github-build-32
       run: | 
-        set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
+        #set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
         qmake.exe qt-github-build-32.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
         mingw32-make.exe qmake_all
         
