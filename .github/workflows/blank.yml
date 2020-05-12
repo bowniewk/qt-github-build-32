@@ -19,6 +19,11 @@ jobs:
     #  run: |
     #    choco.exe uninstall mingw
     #    choco install qt-sdk-windows-x86-mingw_opengl
+    
+    - name: Install correct version of mingw
+      run: |
+        choco uninstall mingw --force
+        choco install mingw --version=7.3.0
         
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
