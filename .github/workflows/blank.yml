@@ -1,68 +1,42 @@
 name: CI
 
+env:
+  QT_VERSION:     "5.12.7"
+  MINGW_VERSION:  "win32_mingw73"
+  MINGW_PATH:     "mingw73_32"
+
 on: [push]
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: show mingw path
-      run: |
-        dir C:\tools\
-        dir C:\ProgramData\chocolatey
-        dir C:\ProgramData\chocolatey\tools
-        #Get-ChildItem -Path Env:\
-        (Get-Command mingw32-make.exe).Path
-        setx PATH "C:\tools\mingw32\bin;C:\tools\mingw64\bin;$env:path" -m
-    
-    #- name: Uninstall default mingw
-    #  run: |
-    #    choco.exe uninstall mingw
-    #    choco install qt-sdk-windows-x86-mingw_opengl
     
     - name: Install correct version of mingw
       run: |
         choco uninstall mingw --force
-        choco install mingw --version=7.3.0
+        choco uninstall strawberryperl --force
+
+    - uses: numworks/setup-msys2@v1
+      with:
+        msystem: MINGW32
         
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
       with:
-        # Directory to install Qt
-        #dir: d:/a/qt-github-build/qt5 # optional
-        # Version of Qt to install
-        #version: 5.14.0 #5.11.3 # 5.12.7 - much slower
-        # Host platform
-        #host: windows # optional
-        # Target platform for build
-        #target: desktop # optional, default is desktop
-        # Architecture for Windows/Android
-        arch: win32_mingw73 #win32_msvc2015 #win32_mingw53 # mingw73 much slower download
-        # Whether or not to install Qt dependencies on Linux
-        #install-deps: true # optional, default is true
-        #modules: qtwidgets widgets
+        version: ${{ env.QT_VERSION }}
+        arch:    ${{ env.MINGW_VERSION }}
+        extra:   --external 7z
 
-    - name: mingw installation
-      run: |
-        choco install mingw
-        
-    - name: Show Qt5 setup
-      run: |
-        echo %Qt5_DIR%
-        (Get-Command qmake.exe).Path
-        (Get-Command mingw32-make.exe).Path
-      
     - uses: actions/checkout@v1
 
     - name: Qmake and make
       working-directory: d:/a/qt-github-build-32/qt-github-build-32
       run: | 
-        #set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
         qmake.exe qt-github-build-32.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
         mingw32-make.exe qmake_all
         
     - name: Make mingw32
       working-directory: d:/a/qt-github-build-32/qt-github-build-32
       run: |
-        #set PATH=C:\tools\mingw32\bin;C:\tools\mingw64\bin;%PATH%
         mingw32-make.exe -j8
